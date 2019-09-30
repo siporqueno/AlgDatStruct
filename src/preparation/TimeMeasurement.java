@@ -1,4 +1,4 @@
-package Preparation;
+package preparation;
 
 import java.util.Arrays;
 import java.util.Random;
