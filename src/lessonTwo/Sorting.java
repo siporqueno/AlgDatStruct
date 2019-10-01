@@ -26,6 +26,20 @@ public class Sorting {
         }
     }
 
+    public static void sortInsert(MyArray myArray) {
+        int in, out;
+        int size = myArray.getSize();
+        for (out = 1; out < size; out++) {
+            in = out - 1;
+            int outElement = myArray.get(out);
+            while (0 <= in && outElement < myArray.get(in)) {
+                myArray.set(in + 1, myArray.get(in));
+                --in;
+            }
+            myArray.set(in + 1, outElement);
+        }
+    }
+
     private static void interchange(MyArray myArray, int indexOne, int indexTwo) {
         int temp = myArray.get(indexOne);
         myArray.set(indexOne, myArray.get(indexTwo));
