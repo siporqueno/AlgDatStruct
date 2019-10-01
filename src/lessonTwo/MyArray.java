@@ -9,6 +9,14 @@ public class MyArray {
         this.size = 0;
     }
 
+    int get(int index){
+        return arr[index];
+    }
+
+    void set(int index, int value){
+        arr[index]=value;
+    }
+
     void insert(int value) {
         this.arr[size] = value;
         size++;
@@ -26,6 +34,10 @@ public class MyArray {
             arr[j] = arr[j + 1];
         }
         size--;
+    }
+
+    public int getSize() {
+        return size;
     }
 
     boolean find(int value) {
