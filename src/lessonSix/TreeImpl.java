@@ -4,6 +4,10 @@ public class TreeImpl implements Tree {
 
     private Node root;
 
+    public Node getRoot() {
+        return root;
+    }
+
     @Override
     public Node find(int id) {
         Node current = root;
@@ -213,7 +217,7 @@ public class TreeImpl implements Tree {
         return rootNode == null ? 0 : 1 + Math.max(getTreeHeight(rootNode.leftChild), getTreeHeight(rootNode.rightChild));
     }
 
-    boolean isBalanced(Node rootNode) {
-        return Math.abs(getTreeHeight(rootNode.leftChild) - getTreeHeight(rootNode.rightChild)) <= 1;
+    boolean isBalanced() {
+        return Math.abs(getTreeHeight(root.leftChild) - getTreeHeight(root.rightChild)) <= 1;
     }
 }
