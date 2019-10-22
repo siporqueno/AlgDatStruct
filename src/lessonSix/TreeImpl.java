@@ -198,7 +198,7 @@ public class TreeImpl implements Tree {
     /**
      * Experimental method
      */
-    Node[] localMinAndItsParent(Node subRoot) {
+    private Node[] localMinAndItsParent(Node subRoot) {
         Node[] MinAndItsParent = {null, subRoot};
         Node current = subRoot;
         while (current != null) {
@@ -207,5 +207,13 @@ public class TreeImpl implements Tree {
             current = current.leftChild;
         }
         return MinAndItsParent; //самый левый лист
+    }
+
+    int getTreeHeight(Node rootNode) {
+        return rootNode == null ? 0 : 1 + Math.max(getTreeHeight(rootNode.leftChild), getTreeHeight(rootNode.rightChild));
+    }
+
+    boolean isBalanced(Node rootNode) {
+        return Math.abs(getTreeHeight(rootNode.leftChild) - getTreeHeight(rootNode.rightChild)) <= 1;
     }
 }
