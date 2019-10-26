@@ -11,6 +11,10 @@ public class Graph {
     private Vertex[] vertexList;
     private int[][] matrix;
     private int size;
+    // Home work of Lesson 7, array of indexes of vertexes called "parents". Parent is a vertex, which is an argument of method getUnvisitedVertex for
+    // vertex returned by this method (provided that it does not return -1)
+    // in the expression y = getUnvisitedVertex(x), x - index (in the array vertexList) of parent for the vertex with index y. y is a child.
+    private int[] parent;
 
     Stack stack;
     Queue queue;
@@ -22,6 +26,9 @@ public class Graph {
         vertexList = new Vertex[VERTS];
         matrix = new int[VERTS][VERTS];
         size = 0;
+
+        // Home work of Lesson 7
+        parent = new int[VERTS];
     }
 
     public void addVertex(char label) {
@@ -72,16 +79,56 @@ public class Graph {
         display(0);
         queue.insert(0);
         int w;
-        while(!queue.isEmpty()){
+        while (!queue.isEmpty()) {
             int v = queue.remove();
-            while((w = getUnvisitVertex(v)) != -1){
+            while ((w = getUnvisitVertex(v)) != -1) {
                 vertexList[w].wasVisited = true;
                 display(w);
                 queue.insert(w);
+                // parent[w]=v;
             }
         }
         for (int i = 0; i < size; i++) {
             vertexList[i].wasVisited = false;
         }
     }
+
+    //Home work of Lesson 7, breadth-first search from vertex with index indexOfStartVertex
+    public void bfs(int indexOfStartVertex) {
+
+        // Initialization of parent array
+        for (int a : parent) a = -1;
+
+        vertexList[indexOfStartVertex].wasVisited = true;
+        display(indexOfStartVertex);
+        queue.insert(indexOfStartVertex);
+        // Start vertex does not have any parent (because it is start vertex) so its parent index in parent array will remain -1
+        int w;
+        while (!queue.isEmpty()) {
+            int v = queue.remove();
+            while ((w = getUnvisitVertex(v)) != -1) {
+                vertexList[w].wasVisited = true;
+                display(w);
+                queue.insert(w);
+                // Filling-in of parent array
+                parent[w] = v;
+            }
+        }
+        for (int i = 0; i < size; i++) {
+            vertexList[i].wasVisited = false;
+        }
+    }
+
+    // Method to get index of vertex by the vertex in vertexList
+    private int getIndexOfVertexByVertex(Vertex vertex) {
+        for (int i = 0; i < size; i++) if (vertexList[i] == vertex) return i;
+        return -1;
+    }
+
+    // Method to get index of vertex by its label in vertexList
+    int getIndexOfVertexByItsLabel(char vertexLabel) {
+        for (int i = 0; i < size; i++) if (vertexList[i].label == vertexLabel) return i;
+        return -1;
+    }
+
 }
