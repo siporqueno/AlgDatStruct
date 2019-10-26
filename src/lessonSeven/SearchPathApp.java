@@ -30,6 +30,7 @@ public class SearchPathApp {
         searchShortestPath('A', 'H', graph);
         searchShortestPath('B', 'C', graph);
         searchShortestPath('F', 'G', graph);
+        searchShortestPath('E', 'G', graph);
 
     }
 
