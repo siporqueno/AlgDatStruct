@@ -1,6 +1,10 @@
 package lessonSeven;
 
+import lessonSeven.stack.Stack;
+import lessonSeven.stack.StackImpl;
+
 public class SearchPathApp {
+    private static final int NO_OF_VERTEXES = 10;
     private static Graph graph = new Graph();
 
     public static void main(String[] args) {
@@ -23,5 +27,29 @@ public class SearchPathApp {
         graph.addEdge(8, 7); // I-H
         graph.addEdge(9, 7); // J-H
 
+        searchShortestPath('A', 'H', graph);
+        searchShortestPath('B', 'C', graph);
+        searchShortestPath('F', 'G', graph);
+
+    }
+
+    static void searchShortestPath(char startVertexLabel, char destVertexLabel, Graph inputGraph) {
+        Stack stackOfPathIndexes = new StackImpl(NO_OF_VERTEXES);
+        int startVertexIndex = inputGraph.getIndexOfVertexByItsLabel(startVertexLabel);
+        int destVertexIndex = inputGraph.getIndexOfVertexByItsLabel(destVertexLabel);
+        int[] parent = inputGraph.bfs(startVertexIndex);
+
+        stackOfPathIndexes.push(destVertexIndex);
+        int tempOriginIndex = destVertexIndex;
+        do {
+            tempOriginIndex = parent[tempOriginIndex];
+            stackOfPathIndexes.push(tempOriginIndex);
+        } while (tempOriginIndex != startVertexIndex);
+
+        System.out.printf("Кратчайший путь из %s в %s: ", startVertexLabel, destVertexLabel);
+        while (!stackOfPathIndexes.isEmpty()) {
+            inputGraph.displayInLine(stackOfPathIndexes.pop());
+        }
+        System.out.println();
     }
 }

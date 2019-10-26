@@ -44,6 +44,10 @@ public class Graph {
         System.out.println(vertexList[vertex].label);
     }
 
+    public void displayInLine(int vertex) {
+        System.out.print(vertexList[vertex].label + " ");
+    }
+
     private int getUnvisitVertex(int ver) {
         for (int i = 0; i < size; i++) {
             if (matrix[ver][i] == 1 && !vertexList[i].wasVisited) {
@@ -94,13 +98,13 @@ public class Graph {
     }
 
     //Home work of Lesson 7, breadth-first search from vertex with index indexOfStartVertex
-    public void bfs(int indexOfStartVertex) {
+    public int[] bfs(int indexOfStartVertex) {
 
         // Initialization of parent array
         for (int a : parent) a = -1;
 
         vertexList[indexOfStartVertex].wasVisited = true;
-        display(indexOfStartVertex);
+//        display(indexOfStartVertex);
         queue.insert(indexOfStartVertex);
         // Start vertex does not have any parent (because it is start vertex) so its parent index in parent array will remain -1
         int w;
@@ -108,7 +112,7 @@ public class Graph {
             int v = queue.remove();
             while ((w = getUnvisitVertex(v)) != -1) {
                 vertexList[w].wasVisited = true;
-                display(w);
+//                display(w);
                 queue.insert(w);
                 // Filling-in of parent array
                 parent[w] = v;
@@ -117,12 +121,7 @@ public class Graph {
         for (int i = 0; i < size; i++) {
             vertexList[i].wasVisited = false;
         }
-    }
-
-    // Method to get index of vertex by the vertex in vertexList
-    private int getIndexOfVertexByVertex(Vertex vertex) {
-        for (int i = 0; i < size; i++) if (vertexList[i] == vertex) return i;
-        return -1;
+        return parent;
     }
 
     // Method to get index of vertex by its label in vertexList
