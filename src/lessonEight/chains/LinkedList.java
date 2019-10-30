@@ -1,18 +1,27 @@
-package lessonFour.list;
+package lessonEight.chains;
 
-public abstract class LinkedList {
+public class LinkedList {
     private Link first;
+
+    public LinkedList() {
+        this.first = new Link(-1);
+    }
 
     public Link getFirst() {
         return first;
     }
-
     public void setFirst(Link first) {
         this.first = first;
     }
 
-    public void insertFirst(String name, int age) {
-        Link newLink = new Link(name, age);
+    public void insertFirst(int data) {
+        Link newLink = new Link(data);
+        newLink.next = first;
+        first = newLink;
+    }
+
+    public void insertFirst(Link link) {
+        Link newLink = link;
         newLink.next = first;
         first = newLink;
     }
@@ -23,18 +32,18 @@ public abstract class LinkedList {
         return temp;
     }
 
-    public Link delete(String name) {
+    public Link delete(int data) {
         Link current = first;
         Link prev = first;
-        while (current.name != name) {
-            if (current.name == null) {
+        while (current.data != data) {
+            if (current.data == -1) {
                 return null;
             } else {
                 prev = current;
                 current = current.next;
             }
         }
-        if (current == first)
+        if(current == first)
             first = first.next;
         else
             prev.next = current.next;
@@ -46,10 +55,10 @@ public abstract class LinkedList {
 //        C - current.next
     }
 
-    public Link find(String name) {
+    public Link find(int data) {
         Link current = first;
-        while (current.name != name) {
-            if (current.name == null) {
+        while (current.data != data) {
+            if (current.data == -1) {
                 return null;
             } else {
                 current = current.next;
@@ -58,11 +67,11 @@ public abstract class LinkedList {
         return current;
     }
 
-    public boolean isFound(String name) {
+    public boolean isFound(int data) {
         boolean result = false;
         Link current = first;
-        while (current.name != null) {
-            if (current.name == name) {
+        while (current.data != -1) {
+            if (current.data == data) {
                 result = true;
                 break;
             } else if (current.next != null) {
@@ -74,15 +83,21 @@ public abstract class LinkedList {
         return result;
     }
 
-    public boolean isEmpty() {
+    /*public boolean isEmpty() {
         return (first == null);
+    }*/
+
+    public boolean isEmpty() {
+        return (first.data == -1);
     }
 
     public void display() {
         Link current = first;
-        while (current != null) {
+//        while (current != null) {
+        while (current.data != -1) {
             current.print();
             current = current.next;
         }
+        System.out.println();
     }
 }
