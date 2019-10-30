@@ -2,14 +2,16 @@ package lessonEight.chains;
 
 public class LinkedList {
     private Link first;
+    private Link nonLink = new Link(-1);
 
     public LinkedList() {
-        this.first = new Link(-1);
+        this.first = nonLink;
     }
 
     public Link getFirst() {
         return first;
     }
+
     public void setFirst(Link first) {
         this.first = first;
     }
@@ -43,7 +45,7 @@ public class LinkedList {
                 current = current.next;
             }
         }
-        if(current == first)
+        if (current == first)
             first = first.next;
         else
             prev.next = current.next;
@@ -74,7 +76,7 @@ public class LinkedList {
             if (current.data == data) {
                 result = true;
                 break;
-            } else if (current.next != null) {
+            } else if (current.next != nonLink) {
                 current = current.next;
             } else {
                 break;
@@ -82,10 +84,6 @@ public class LinkedList {
         }
         return result;
     }
-
-    /*public boolean isEmpty() {
-        return (first == null);
-    }*/
 
     public boolean isEmpty() {
         return (first.data == -1);

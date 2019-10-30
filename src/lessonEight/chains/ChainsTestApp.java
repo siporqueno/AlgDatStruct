@@ -11,6 +11,7 @@ public class ChainsTestApp {
         hashTable.delete(13);
         hashTable.display();
         hashTable.find(13).print();
+        System.out.println();
         hashTable.find(50).print();
 
     }
