@@ -1,6 +1,6 @@
 package lessonFour.list;
 
-public class LinkedListApp {
+public class  LinkedListApp {
 
     public static void main(String[] args) {
         LinkedList customList = new SingleLinkedList();
